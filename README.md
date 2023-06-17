@@ -22,7 +22,7 @@
   </a>
     &nbsp;
   <a href="https://github.com/sinanbekar/browser-extension-react-typescript-starter/blob/main/LICENSE">
-    <img src="https://img.shields.io/apm/l/atomic-design-ui.svg" alt="MIT License">
+    <img alt="GitHub" src="https://img.shields.io/github/license/luis-c465/made-in">
   </a>
 
 </div>

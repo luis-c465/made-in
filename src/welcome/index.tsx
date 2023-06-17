@@ -1,10 +1,6 @@
 import '../global.css';
-import React from 'react';
-import { createRoot } from 'react-dom/client';
-import Welcome from './Welcome';
 
-createRoot(document.getElementById('root') as HTMLElement).render(
-  <React.StrictMode>
-    <Welcome />
-  </React.StrictMode>
-);
+const root = document.getElementById('root') as HTMLElement;
+root.innerHTML = `
+  <h1>Welcome to the extension!</h1>
+`;

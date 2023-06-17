@@ -5,10 +5,12 @@ import { version } from '../package.json';
 // vite root folder: src, public folder: public (based on the project root)
 // @see ../vite.config.ts#L16
 
+const amazonSearchHost = 'www.amazon.com';
+
 const manifest = defineManifest(async (env) => ({
   manifest_version: 3,
-  name: `${env.mode === 'development' ? '[Dev] ' : ''}Browser Extension TypeScript & React Starter`,
-  description: 'Browser Extension, TypeScript, React',
+  name: `${env.mode === 'development' ? '[Dev] ' : ''} Made in`,
+  description: 'Made in',
   version,
   background: {
     service_worker: 'background/index.ts',
@@ -16,7 +18,11 @@ const manifest = defineManifest(async (env) => ({
   content_scripts: [
     {
       matches: ['http://*/*', 'https://*/*', 'file:///*'],
-      js: ['content/index.tsx'],
+      js: ['content/index.ts'],
+    },
+    {
+      matches: [`https://${amazonSearchHost}/*`, `https://${amazonSearchHost}/*`, 'file:///*'],
+      js: ['content/amazon.ts'],
     },
   ],
   host_permissions: ['<all_urls>'],
