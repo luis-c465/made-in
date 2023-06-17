@@ -1,3 +1,3 @@
 import '../global.css';
 
-const root = document.getElementById('root') as HTMLElement;
+// const root = document.getElementById('root') as HTMLElement;
