@@ -5,7 +5,7 @@ import { version } from '../package.json';
 // vite root folder: src, public folder: public (based on the project root)
 // @see ../vite.config.ts#L16
 
-const amazonSearchHost = 'www.amazon.com';
+const amazonSearchHost = 'www.amazon.com/s';
 
 const manifest = defineManifest(async (env) => ({
   manifest_version: 3,
@@ -17,11 +17,7 @@ const manifest = defineManifest(async (env) => ({
   },
   content_scripts: [
     {
-      matches: ['http://*/*', 'https://*/*', 'file:///*'],
-      js: ['content/index.ts'],
-    },
-    {
-      matches: [`https://${amazonSearchHost}/*`, `https://${amazonSearchHost}/*`, 'file:///*'],
+      matches: [`https://${amazonSearchHost}*`, `https://${amazonSearchHost}*`, 'file:///*'],
       js: ['content/amazon.ts'],
     },
   ],
