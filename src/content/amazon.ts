@@ -1,49 +1,36 @@
-import { flag } from 'country-emoji';
+import { storage } from 'webextension-polyfill';
+import { getCountryOfOrigin, renderProduct } from '~/util/index';
 // import { getElementByXpath } from '~/utils/index';
 
 // show welcome page on new install
 console.log('Hello from amazon.ts');
-const products = [...document.querySelectorAll<HTMLDivElement>('div[data-component-type]')];
-
-const promises = products.map(async (product) => {
-  const link = product.querySelector<HTMLAnchorElement>('a.a-link-normal');
-  const href = link?.href as string;
-
-  const data = await fetch(href).then((res) => res.text());
-
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(data, 'text/html');
-
-  const countryOfOriginElm = getElementByXpath(doc, "//*[contains(text(),'Country of Origin')]");
-  if (!countryOfOriginElm) {
-    return null;
-  }
-
-  const parent = countryOfOriginElm.parentElement as HTMLTableRowElement;
-  const country = parent.children[1] as HTMLElement;
-  if (!country) {
-    return;
-  }
-
-  const emoji = flag(country.innerText.trim());
-  if (!emoji) {
-    return;
-  }
-
-  const div = document.createElement('div');
-  div.innerText = emoji;
-  div.id = 'country-of-origin';
-
-  div.style.position = 'absolute';
-  div.style.top = '10';
-  div.style.right = '10';
-  div.style.fontSize = '2rem';
-
-  product.style.position = 'relative';
-  product.prepend(div);
-});
 
 async function main() {
+  const products = [...document.querySelectorAll<HTMLDivElement>('div[data-asin^="B"]')];
+  const ids = products.map((product) => product.dataset.asin as string);
+
+  const defaultValues = Object.fromEntries(ids.map((id) => [id, null]));
+  const cache = await storage.local.get(defaultValues);
+
+  const promises = products.map(async (product) => {
+    const asin = product.dataset.asin as string;
+    const country = cache[asin] !== null ? cache[asin] : await getCountryOfOrigin(product, asin);
+    renderProduct(product, country);
+  });
+
+  const pagination = document.querySelector<HTMLDivElement>('.s-pagination-strip');
+  pagination?.addEventListener('click', () => {
+    console.log('pagination clicked');
+    const interval = setInterval(() => {
+      const elm = document.querySelector<HTMLDivElement>('.s-result-list-placeholder');
+      if (elm?.classList.contains('aok-hidden')) {
+        clearInterval(interval);
+
+        main();
+      }
+    }, 300);
+  });
+
   try {
     await Promise.allSettled(promises);
   } catch (e) {
@@ -53,8 +40,3 @@ async function main() {
 }
 
 main();
-
-function getElementByXpath(doc: Document, path: string) {
-  return doc.evaluate(path, doc.body, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null)
-    .singleNodeValue as Element | null;
-}
