@@ -13,15 +13,15 @@
 <hr />
 
 <div align="center" >
-  <a href="https://github.com/sinanbekar/browser-extension-react-typescript-starter/actions">
-    <img src="https://github.com/sinanbekar/browser-extension-react-typescript-starter/actions/workflows/ci.yml/badge.svg" alt="CI">
+  <a href="https://github.com/luis-c465/made-in/actions">
+    <img src="https://github.com/luis-c465/made-in/actions/workflows/ci.yml/badge.svg" alt="CI">
   </a>
     &nbsp;
   <a>
     <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs welcome">
   </a>
     &nbsp;
-  <a href="https://github.com/sinanbekar/browser-extension-react-typescript-starter/blob/main/LICENSE">
+  <a href="https://github.com/luis-c465/made-in/blob/main/LICENSE">
     <img alt="GitHub" src="https://img.shields.io/github/license/luis-c465/made-in">
   </a>
 
