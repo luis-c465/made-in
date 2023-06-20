@@ -7,6 +7,13 @@ import { version } from '../package.json';
 
 const amazonSearchHost = 'www.amazon.com/s';
 
+const icons: Record<string, string> = {
+  '16': 'icons/icon16.png',
+  '32': 'icons/icon32.png',
+  '48': 'icons/icon48.png',
+  '128': 'icons/icon128.png',
+};
+
 const manifest = defineManifest(async (env) => ({
   manifest_version: 3,
   name: `${env.mode === 'development' ? '[Dev] ' : ''} Made in`,
@@ -37,19 +44,9 @@ const manifest = defineManifest(async (env) => ({
   ],
   action: {
     default_popup: 'popup/popup.html',
-    default_icon: {
-      '16': 'images/extension_16.png',
-      '32': 'images/extension_32.png',
-      '48': 'images/extension_48.png',
-      '128': 'images/extension_128.png',
-    },
+    default_icon: icons,
   },
-  icons: {
-    '16': 'images/extension_16.png',
-    '32': 'images/extension_32.png',
-    '48': 'images/extension_48.png',
-    '128': 'images/extension_128.png',
-  },
+  icons,
   permissions: ['storage', 'tabs'],
 }));
 

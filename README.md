@@ -1,15 +1,15 @@
 <div align="center">
   <br>
- <img src="https://raw.githubusercontent.com/sinanbekar/browser-extension-react-typescript-starter/main/public/images/extension_128.png" alt="Browser Extension React & TypeScript Starter" width="128">
+ <img src="./assets/icon.svg" alt="Made in Browser Extension" width="128">
   <br>
   <h2>
-    Browser Extension <br>
-    React & TypeScript Starter
+    Made In <br>
+    Browser Extension
     <br>
   </h2>
 </div>
 
-<p align="center">A cross-platform (Chrome, Firefox, Edge, Opera, Brave) web browser extension (Manifest V3 and Manifest V2) starter kit with hot reload support, built with React, Typescript, Redux, Vite, ESLint, Prettier, TailwindCSS, Jest and more! </p>
+<p align="center">A cross-platform web browser extension that shows the country of origin on product for popular websites</p>
 <hr />
 
 <div align="center" >
@@ -30,34 +30,13 @@
 <p align="center">
   <a href="#features">Features</a> ·
   <a href="#quick-start">Quick Start</a> ·
-  <a href="#important-notes">Important Notes</a> ·
-  <a href="#license">License</a>
+  <a href="#contributing">Contributing</a>
 </p>
 
 ## Features
 
-- **Instant HMR** (hot reload)[^1]
-- Write once run on any browser
-- Global Redux support with persist option. Effortless communication between content, background, popup, options, and more pages.
-- Provides a basic content example and popup, options, and welcome pages with all React
-- Latest Manifest V3 support
-- Manifest V2 support (beta)
-- Dynamic manifest.json
-- Includes ESLint configured to work with TypeScript and Prettier
-- Includes tests with Jest
-
-#### Built with
-
-- React
-- TypeScript
-- Redux (toolkit and redux-persist)
-- TailwindCSS
-- Vite
-- Jest
-- ESLint
-- Prettier
-- simple-git-hooks (lightweight husky alternative)
-- nano-staged
+- Support for Amazon search results page
+  ![Amazon search results page](./assets/amazon.png)
 
 [^1]: While it is fully supported and stable in most cases, hard reloading is rarely recommended.
 
@@ -71,34 +50,20 @@
 
 Ensure you have
 
-- [Node.js](https://nodejs.org) 16 or later installed
-- [Yarn](https://yarnpkg.com) installed
+- [Node.js](https://nodejs.org/en/download) 16 or later installed
+- [Pnpm](https://pnpm.io/installation) installed
 
-### Use the Template
-
-#### GitHub Template
-
-[Create a repo from this template on GitHub](https://github.com/sinanbekar/browser-extension-react-typescript-starter/generate).
-
-**_or_**
-
-#### Clone to local
-
-If you prefer to do it manually with the cleaner git history
-
-> **Note** If you don't have yarn installed, run: npm install -g yarn
+### Clone the repo
 
 ```bash
-npx degit sinanbekar/browser-extension-react-typescript-starter my-web-extension
-cd my-web-extension
-git init
+git clone https://github.com/luis-c465/made-in.git
 ```
 
-Then run the following:
+### Running the extension
 
-- `yarn install` to install dependencies.
-- `yarn dev` to start the development server.
-- `yarn build` to build an unpacked extension.
+- `pnpm install` to install dependencies.
+- `pnpm run dev` to start the development server.
+- `pnpm run build` to build an unpacked extension.
 
 - **Load extension in Chrome (Chromium, Manifest V3)**
 
@@ -115,31 +80,14 @@ Then run the following:
 
 ### Available Commands
 
-- `yarn clean` to remove dist folder. `dev` and `build` commands call this command.
-- `yarn format` to fix code with eslint and prettier.
-- `yarn lint` to call ESLint and Prettier.
-- `yarn test` for testing.
-
-### Redux
-
-You can use redux (redux-toolkit) as state manager between popup, background, content and custom pages. Read the documentation for more.
-
-#### [@eduardoac-skimlinks/webext-redux](https://github.com/eduardoacskimlinks/webext-redux)
-
-### Bundling
-
-#### [@crxjs/vite-plugin](https://github.com/crxjs/chrome-extension-tools)
-
-> **Note** This plugin powers the development side of this starter.
->
-> docs: https://crxjs.dev/vite-plugin
->
-> Special thanks to [@jacksteamdev](https://github.com/jacksteamdev) and contributors for this amazing plugin.
+- `pnpm run clean` to remove dist folder. `dev` and `build` commands call this command.
+- `pnpm run format` to fix code with eslint and prettier.
+- `pnpm run lint` to call ESLint and Prettier.
 
 ## Contributing
 
+Contributions are always welcome!
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for ways to get started.
+
 This repository is following the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) standard.
-
-## License
-
-MIT © [Sinan Bekar](https://sinan.engineer)
