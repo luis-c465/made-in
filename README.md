@@ -27,11 +27,13 @@
 
 </div>
 
-<p align="center">
-  <a href="#features">Features</a> ·
-  <a href="#quick-start">Quick Start</a> ·
-  <a href="#contributing">Contributing</a>
-</p>
+- [Features](#features)
+- [Browser Support](#browser-support)
+- [Quick Start](#quick-start)
+  - [Clone the repo](#clone-the-repo)
+  - [Running the extension](#running-the-extension)
+  - [Available Commands](#available-commands)
+- [Contributing](#contributing)
 
 ## Features
 
