@@ -29,5 +29,5 @@ export default defineConfig({
       },
     },
   },
-  plugins: [tsconfigPaths(), crx({ manifest }), svelte()],
+  plugins: [tsconfigPaths(), crx({ manifest }), svelte({ configFile: '../svelte.config.js' })],
 });

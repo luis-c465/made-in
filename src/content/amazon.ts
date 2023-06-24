@@ -1,9 +1,7 @@
-import { storage } from 'webextension-polyfill';
+import { runtime, storage } from 'webextension-polyfill';
 import { getCountryOfOrigin, renderProduct } from '~/util/index';
-// import { getElementByXpath } from '~/utils/index';
 
-// show welcome page on new install
-console.log('Hello from amazon.ts');
+export const type = 'PRODUCTS';
 
 async function main() {
   const products = [...document.querySelectorAll<HTMLDivElement>('div[data-asin^="B"]')];
@@ -12,11 +10,20 @@ async function main() {
   const defaultValues = Object.fromEntries(ids.map((id) => [id, null]));
   const cache = await storage.local.get(defaultValues);
 
+  let numResolved = 0;
+  const numTotal = products.length;
+  runtime.sendMessage({ type: 'PRODUCTS', payload: { numResolved, numTotal } });
+
   const promises = products.map(async (product) => {
     const asin = product.dataset.asin as string;
     const country = cache[asin] !== null ? cache[asin] : await getCountryOfOrigin(product, asin);
     renderProduct(product, country);
+
+    numResolved++;
+    runtime.sendMessage({ type: 'PRODUCTS', payload: { numResolved, numTotal } });
   });
+
+  // Send messages to the popup page
 
   const pagination = document.querySelector<HTMLDivElement>('.s-pagination-strip');
   pagination?.addEventListener('click', () => {

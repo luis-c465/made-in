@@ -1,3 +1,9 @@
 import '../global.css';
 
-// const root = document.getElementById('root') as HTMLElement;
+import Popup from './Popup.svelte';
+
+const app = new Popup({
+  target: document.getElementById('app')!,
+});
+
+export default app;
