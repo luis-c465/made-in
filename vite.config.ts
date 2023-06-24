@@ -1,4 +1,5 @@
 import { crx } from '@crxjs/vite-plugin';
+import { svelte } from '@sveltejs/vite-plugin-svelte';
 import { join, resolve } from 'path';
 import { defineConfig } from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
@@ -28,5 +29,5 @@ export default defineConfig({
       },
     },
   },
-  plugins: [tsconfigPaths(), crx({ manifest })],
+  plugins: [tsconfigPaths(), crx({ manifest }), svelte()],
 });
