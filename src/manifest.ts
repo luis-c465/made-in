@@ -25,7 +25,7 @@ const manifest = defineManifest(async (env) => ({
   content_scripts: [
     {
       matches: [`https://${amazonSearchHost}*`, `https://${amazonSearchHost}*`, 'file:///*'],
-      js: ['content/amazon.ts'],
+      js: ['content/amazon/index.ts'],
     },
   ],
   host_permissions: ['<all_urls>'],

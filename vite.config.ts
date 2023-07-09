@@ -13,6 +13,10 @@ export default defineConfig({
     hmr: {
       port: 5173,
     },
+    fs: {
+      // Allow serving files from one level up to the project root
+      allow: ['..'],
+    },
   },
   // prevent src/ prefix on extension urls
   root: resolve(__dirname, 'src'),
