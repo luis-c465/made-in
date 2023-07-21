@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "run-s clean && vite",
-    "build": "run-s clean && tsc && vite build && run-s firefox-mv2-build",
+    "build": "run-s clean && tsc && vite build --emptyOutDir && run-s firefox-mv2-build && run-s zip",
+    "zip": "bestzip build.zip dist",
     "firefox-mv2-build": "node tools/unstable_mv3ToMv2Build.js",
     "clean": "run-p clean:*",
     "clean:dist": "rimraf dist",
@@ -27,14 +28,11 @@
     "clsx": "^1.2.1",
     "country-emoji": "^1.5.6",
     "url-polyfill": "^1.1.12",
-    "vite-tsconfig-paths": "^4.2.0",
     "webextension-polyfill": "^0.10.0"
   },
   "devDependencies": {
     "@crxjs/vite-plugin": "^2.0.0-beta.17",
     "@sveltejs/vite-plugin-svelte": "^2.2.2",
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/user-event": "^14.4.3",
     "@tsconfig/svelte": "^4.0.1",
     "@types/fs-extra": "^11.0.1",
     "@types/lodash-es": "^4.17.7",
@@ -42,6 +40,7 @@
     "@typescript-eslint/eslint-plugin": "^5.59.11",
     "@typescript-eslint/parser": "^5.59.11",
     "autoprefixer": "^10.4.8",
+    "bestzip": "^2.2.1",
     "construct-style-sheets-polyfill": "^3.1.0",
     "eslint": "^8.42.0",
     "eslint-config-prettier": "^8.8.0",
@@ -60,7 +59,8 @@
     "tailwindcss": "^3.3.2",
     "tslib": "^2.5.3",
     "typescript": "4.8.4",
-    "vite": "^4.3.9"
+    "vite": "^4.4.3",
+    "vite-tsconfig-paths": "^4.2.0"
   },
   "simple-git-hooks": {
     "pre-commit": "./node_modules/.bin/nano-staged"

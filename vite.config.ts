@@ -1,6 +1,6 @@
 import { crx } from '@crxjs/vite-plugin';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
-import { join, resolve } from 'path';
+import { resolve } from 'path';
 import { defineConfig } from 'vite';
 import tsconfigPaths from 'vite-tsconfig-paths';
 import manifest from './src/manifest';
@@ -24,10 +24,6 @@ export default defineConfig({
   build: {
     outDir: resolve(__dirname, 'dist'),
     rollupOptions: {
-      input: {
-        // see web_accessible_resources in the manifest config
-        welcome: join(__dirname, 'src/welcome/welcome.html'),
-      },
       output: {
         chunkFileNames: 'assets/chunk-[hash].js',
       },
