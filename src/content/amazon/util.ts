@@ -1,6 +1,11 @@
+import * as cheerio from 'cheerio';
 import { flag } from 'country-emoji';
 import { storage } from 'webextension-polyfill';
-import { getElementByXpath } from '~/util';
+
+new FontFace(
+  'Noto Color Emoji',
+  'https://raw.githack.com/googlefonts/noto-emoji/main/fonts/NotoColorEmoji.ttf'
+);
 
 /*
  * Get the country of origin from the product page
@@ -20,26 +25,18 @@ export async function getCountryOfOrigin(product: HTMLDivElement, asin: string) 
   }
 
   const data = await fetch(href).then((res) => res.text());
+  const $ = cheerio.load(data);
+  const countryElm = $('ul.detail-bullet-list > li:contains("Country of Origin") > span > span').eq(
+    1
+  );
 
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(data, 'text/html');
-
-  const countryOfOriginElm = getElementByXpath(doc, "//*[contains(text(),'Country of Origin')]");
-  if (!countryOfOriginElm) {
-    storage.local.set({ [asin]: null });
-
-    return null;
-  }
-
-  const parent = countryOfOriginElm.parentElement as HTMLTableRowElement;
-  const countryElm = parent.children[1] as HTMLElement;
   if (!countryElm) {
     storage.local.set({ [asin]: null });
 
     return null;
   }
 
-  const country = countryElm.innerText.trim();
+  const country = countryElm.text().trim();
   storage.local.set({ [asin]: country });
   return country;
 }
@@ -66,6 +63,8 @@ export function renderProduct(product: HTMLDivElement, countryOfOrigin: string |
   div.style.right = '10';
   div.style.fontSize = '2.5rem';
   div.style.zIndex = '1';
+  div.style.fontFamily = 'Noto Color Emoji';
+
   div.title = `Product Country of Origin: ${countryOfOrigin}`;
 
   product.style.position = 'relative';

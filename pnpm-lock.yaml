@@ -17,12 +17,18 @@ dependencies:
   '@twind/preset-tailwind':
     specifier: ^1.1.4
     version: 1.1.4(@twind/core@1.1.3)(typescript@4.8.4)
+  cheerio:
+    specifier: 1.0.0-rc.12
+    version: 1.0.0-rc.12
   clsx:
     specifier: ^1.2.1
     version: 1.2.1
   country-emoji:
     specifier: ^1.5.6
     version: 1.5.6
+  p-map:
+    specifier: ^6.0.0
+    version: 6.0.0
   url-polyfill:
     specifier: ^1.1.12
     version: 1.1.12
@@ -1234,7 +1240,6 @@ packages:
       {
         integrity: sha512-JZOSA7Mo9sNGB8+UjSgzdLtokWAky1zbztM3WRLCbZ70/3cTANmQmOdR7y2g+J0e2WXywy1yS468tY+IruqEww==,
       }
-    dev: true
 
   /brace-expansion@1.1.11:
     resolution:
@@ -1354,7 +1359,6 @@ packages:
       domelementtype: 2.3.0
       domhandler: 5.0.3
       domutils: 3.1.0
-    dev: true
 
   /cheerio@1.0.0-rc.12:
     resolution:
@@ -1370,7 +1374,6 @@ packages:
       htmlparser2: 8.0.2
       parse5: 7.1.2
       parse5-htmlparser2-tree-adapter: 7.0.0
-    dev: true
 
   /chokidar@3.5.3:
     resolution:
@@ -1568,7 +1571,6 @@ packages:
       domhandler: 5.0.3
       domutils: 3.1.0
       nth-check: 2.1.1
-    dev: true
 
   /css-tree@2.3.1:
     resolution:
@@ -1586,7 +1588,6 @@ packages:
         integrity: sha512-HTUrgRJ7r4dsZKU6GjmpfRK1O76h97Z8MfS1G0FozR+oF2kG6Vfe8JE6zwrkbxigziPHinCJ+gCPjA9EaBDtRw==,
       }
     engines: { node: '>= 6' }
-    dev: true
 
   /cssesc@3.0.0:
     resolution:
@@ -1706,14 +1707,12 @@ packages:
       domelementtype: 2.3.0
       domhandler: 5.0.3
       entities: 4.5.0
-    dev: true
 
   /domelementtype@2.3.0:
     resolution:
       {
         integrity: sha512-OLETBj6w0OsagBwdXnPdN0cnMfF9opN69co+7ZrbfPGrdpPVNBUj02spi6B1N7wChLQiPn4CSH/zJvXw56gmHw==,
       }
-    dev: true
 
   /domhandler@5.0.3:
     resolution:
@@ -1723,7 +1722,6 @@ packages:
     engines: { node: '>= 4' }
     dependencies:
       domelementtype: 2.3.0
-    dev: true
 
   /domutils@3.1.0:
     resolution:
@@ -1734,7 +1732,6 @@ packages:
       dom-serializer: 2.0.0
       domelementtype: 2.3.0
       domhandler: 5.0.3
-    dev: true
 
   /electron-to-chromium@1.4.432:
     resolution:
@@ -1765,7 +1762,6 @@ packages:
         integrity: sha512-V0hjH4dGPh9Ao5p0MoRY6BVqtwCjhz6vI5LT8AJ55H+4g9/4vbHx1I54fS0XuclLhDHArPQCiMjDxjaL8fPxhw==,
       }
     engines: { node: '>=0.12' }
-    dev: true
 
   /error-ex@1.3.2:
     resolution:
@@ -2353,7 +2349,6 @@ packages:
       domhandler: 5.0.3
       domutils: 3.1.0
       entities: 4.5.0
-    dev: true
 
   /identity-obj-proxy@3.0.0:
     resolution:
@@ -2933,7 +2928,6 @@ packages:
       }
     dependencies:
       boolbase: 1.0.0
-    dev: true
 
   /object-assign@4.1.1:
     resolution:
@@ -2995,6 +2989,14 @@ packages:
       p-limit: 3.1.0
     dev: true
 
+  /p-map@6.0.0:
+    resolution:
+      {
+        integrity: sha512-T8BatKGY+k5rU+Q/GTYgrEf2r4xRMevAN5mtXc2aPc4rS1j3s+vWTaO2Wag94neXuCAUAs8cxBL9EeB5EA6diw==,
+      }
+    engines: { node: '>=16' }
+    dev: false
+
   /parent-module@1.0.1:
     resolution:
       {
@@ -3026,7 +3028,6 @@ packages:
     dependencies:
       domhandler: 5.0.3
       parse5: 7.1.2
-    dev: true
 
   /parse5@7.1.2:
     resolution:
@@ -3035,7 +3036,6 @@ packages:
       }
     dependencies:
       entities: 4.5.0
-    dev: true
 
   /path-exists@4.0.0:
     resolution:

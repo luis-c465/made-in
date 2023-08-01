@@ -1,6 +1,7 @@
 <script lang="ts">
   import { IconMinus, IconPlus } from '@tabler/icons-svelte';
   import clsx from 'clsx';
+  import pMap from 'p-map';
   import { onMount } from 'svelte';
   import { storage } from 'webextension-polyfill';
   import { getCountryOfOrigin, renderProduct as renderProductFlag } from './util';
@@ -23,16 +24,14 @@
     const defaultValues = Object.fromEntries(ids.map((id) => [id, null]));
     const cache = await storage.local.get(defaultValues);
 
-    const promises = productsElms.map(async (product) => {
-      const asin = product.dataset.asin as string;
-      const country = cache[asin] !== null ? cache[asin] : await getCountryOfOrigin(product, asin);
-      renderProductFlag(product, country);
-
-      numResolved = Math.min(numResolved + 1, productsElms.length);
-    });
-
     try {
-      await Promise.allSettled(promises);
+      await pMap(productsElms, async (product) => {
+        const asin = product.dataset.asin as string;
+        const country = cache[asin] !== null ? cache[asin] : await getCountryOfOrigin(product, asin);
+        renderProductFlag(product, country);
+
+        numResolved = Math.min(numResolved + 1, productsElms.length);
+      }, { concurrency: 30 });
     } catch (e) {
       console.log('something went wrong');
       console.error(e);
