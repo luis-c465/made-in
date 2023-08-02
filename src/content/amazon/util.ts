@@ -64,7 +64,7 @@ export function renderProduct(product: HTMLDivElement, countryOfOrigin: string |
   div.style.top = '10';
   div.style.right = '10';
   div.style.fontSize = '2.5rem';
-  div.style.zIndex = '1';
+  div.style.zIndex = '2';
   div.style.fontFamily = 'Noto Color Emoji';
 
   div.title = `Product Country of Origin: ${countryOfOrigin}`;
