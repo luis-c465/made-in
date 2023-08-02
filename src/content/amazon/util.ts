@@ -2,10 +2,11 @@ import * as cheerio from 'cheerio';
 import { flag } from 'country-emoji';
 import { storage } from 'webextension-polyfill';
 
-new FontFace(
+const font = new FontFace(
   'Noto Color Emoji',
-  'https://raw.githack.com/googlefonts/noto-emoji/main/fonts/NotoColorEmoji.ttf'
+  'url(https://raw.githack.com/googlefonts/noto-emoji/main/fonts/NotoColorEmoji.ttf)'
 );
+document.fonts.add(font);
 
 /*
  * Get the country of origin from the product page
