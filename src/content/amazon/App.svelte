@@ -4,6 +4,7 @@
   import pMap from 'p-map';
   import { onMount } from 'svelte';
   import { storage } from 'webextension-polyfill';
+  import { concurrency } from '~/settings';
   import { getCountryOfOrigin, renderProduct as renderProductFlag } from './util';
 
   let hidden = false;
@@ -25,13 +26,18 @@
     const cache = await storage.local.get(defaultValues);
 
     try {
-      await pMap(productsElms, async (product) => {
-        const asin = product.dataset.asin as string;
-        const country = cache[asin] !== null ? cache[asin] : await getCountryOfOrigin(product, asin);
-        renderProductFlag(product, country);
+      await pMap(
+        productsElms,
+        async (product) => {
+          const asin = product.dataset.asin as string;
+          const country =
+            cache[asin] !== null ? cache[asin] : await getCountryOfOrigin(product, asin);
+          renderProductFlag(product, country);
 
-        numResolved = Math.min(numResolved + 1, productsElms.length);
-      }, { concurrency: 30 });
+          numResolved = Math.min(numResolved + 1, productsElms.length);
+        },
+        { concurrency: await $concurrency }
+      );
     } catch (e) {
       console.log('something went wrong');
       console.error(e);
