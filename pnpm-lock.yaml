@@ -26,6 +26,9 @@ dependencies:
   country-emoji:
     specifier: ^1.5.6
     version: 1.5.6
+  driver.js:
+    specifier: ^1.1.0
+    version: 1.1.0
   p-map:
     specifier: ^6.0.0
     version: 6.0.0
@@ -1735,6 +1738,13 @@ packages:
       dom-serializer: 2.0.0
       domelementtype: 2.3.0
       domhandler: 5.0.3
+
+  /driver.js@1.1.0:
+    resolution:
+      {
+        integrity: sha512-jvor5wrzu0JmHwPAuCb7j8YzHcgitq5ibgCsgBO85fv0Zst/UPdO60/hKooCKMdQMYRPKABmSDhVSftS6NaJqA==,
+      }
+    dev: false
 
   /electron-to-chromium@1.4.432:
     resolution:

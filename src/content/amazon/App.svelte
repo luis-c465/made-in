@@ -1,38 +1,17 @@
 <script lang="ts">
-  import { flag } from 'country-emoji';
   import pMap from 'p-map';
   import { onMount } from 'svelte';
   import { storage } from 'webextension-polyfill';
   import LoadingBar from '~/components/LoadingBar.svelte';
   import Popup from '~/components/Popup.svelte';
+  import Summary from '~/components/Summary.svelte';
   import { concurrency } from '~/settings';
-  import { getCountryOfOrigin, renderProduct as renderProductFlag } from './util';
-
-  type Data = {
-    asin: string;
-    country: string;
-    product: HTMLDivElement;
-  };
+  import type { Data } from '~/util/types';
+  import { getCountryOfOrigin, isVisible, renderProduct as renderProductFlag } from './util';
 
   let numResolved = 0;
   let productsElms: HTMLDivElement[] = [];
   let data: Data[] = [];
-  let dataSummary: [string, number][] = [];
-
-  $: dataSummary = Object.entries(
-    data
-      .filter(Boolean)
-      .filter(({ country }) => !!country)
-      .reduce<{ [key: string]: number }>((acc, { country }) => {
-        if (acc[country] === undefined) {
-          acc[country] = 1;
-        } else {
-          acc[country]++;
-        }
-
-        return acc;
-      }, {})
-  ).sort((a, b) => b[1] - a[1]);
 
   // let percentLoaded = percent(numResolved, productsElms.length);
   let percentLoaded = 0;
@@ -42,7 +21,7 @@
   async function main() {
     productsElms = Array.from(
       document.querySelectorAll<HTMLDivElement>('.s-search-results > div[data-asin^="B"]')
-    );
+    ).filter(isVisible);
     numResolved = 0;
 
     const ids = productsElms.map((product) => product.dataset.asin as string);
@@ -85,14 +64,15 @@
       {percentLoaded}%
     </LoadingBar>
 
-    <div class="overflow-y-auto h-fit max-h-[50px] flex flex-wrap gap-1">
+    <!-- <div class="overflow-y-auto h-fit max-h-[50px] flex flex-wrap gap-1">
       {#each dataSummary as [country, count], i (country)}
         <div class="flex text-lg gap-1" title={country}>
           <span style="font-family: Noto Color Emoji;">{flag(country)}</span>
           <span>{count}</span>
         </div>
       {/each}
-    </div>
+    </div> -->
+    <Summary {data} />
 
     <button
       class="bg-blue-400 hover:bg-blue-600 transition-colors rounded-md p-3 bg-opacity-60"

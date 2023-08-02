@@ -72,3 +72,7 @@ export function renderProduct(product: HTMLDivElement, countryOfOrigin: string |
   product.style.position = 'relative';
   product.prepend(div);
 }
+
+export function isVisible(element: HTMLElement) {
+  return element.offsetWidth > 0 || element.offsetHeight > 0 || element.getClientRects().length > 0;
+}
