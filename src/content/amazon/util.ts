@@ -26,9 +26,11 @@ export async function getCountryOfOrigin(product: HTMLDivElement, asin: string) 
 
   const data = await fetch(href).then((res) => res.text());
   const $ = cheerio.load(data);
-  const countryElm = $('ul.detail-bullet-list > li:contains("Country of Origin") > span > span').eq(
-    1
-  );
+  const contains = $('*:contains("Country of Origin")');
+  const countryParentElm = contains.last().parent();
+
+  const countryElm = countryParentElm?.children().last();
+  const country = countryElm.text().trim();
 
   if (!countryElm) {
     storage.local.set({ [asin]: null });
@@ -36,7 +38,7 @@ export async function getCountryOfOrigin(product: HTMLDivElement, asin: string) 
     return null;
   }
 
-  const country = countryElm.text().trim();
+  // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
   storage.local.set({ [asin]: country });
   return country;
 }
