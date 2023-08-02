@@ -6,6 +6,7 @@ import { version } from '../package.json';
 // @see ../vite.config.ts#L16
 
 const amazonSearchHost = 'www.amazon.com/s';
+const amazonProductHost = 'www.amazon.com/*/dp';
 
 const icons: Record<string, string> = {
   '16': 'images/icon16.png',
@@ -14,7 +15,11 @@ const icons: Record<string, string> = {
   '128': 'images/icon128.png',
 };
 
-const activateOn = [`https://${amazonSearchHost}*`, `https://${amazonSearchHost}*`, 'file:///*'];
+const activateOnAmazonSearch = [`https://${amazonSearchHost}*`, `http://${amazonSearchHost}*`];
+
+const activateOnAmazonProduct = [`http://${amazonProductHost}*`, `https://${amazonProductHost}*`];
+
+const activateOn = [...activateOnAmazonSearch, ...activateOnAmazonProduct];
 
 const manifest = defineManifest(async (env) => ({
   manifest_version: 3,
@@ -23,8 +28,12 @@ const manifest = defineManifest(async (env) => ({
   version,
   content_scripts: [
     {
-      matches: activateOn,
+      matches: activateOnAmazonSearch,
       js: ['content/amazon/index.ts'],
+    },
+    {
+      matches: activateOnAmazonProduct,
+      js: ['content/amazon/product.ts'],
     },
   ],
   host_permissions: activateOn,

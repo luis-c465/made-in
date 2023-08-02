@@ -26,22 +26,37 @@ export async function getCountryOfOrigin(product: HTMLDivElement, asin: string) 
   }
 
   const data = await fetch(href).then((res) => res.text());
-  const $ = cheerio.load(data);
+  // const $ = cheerio.load(data);
+  // const contains = $('*:contains("Country of Origin")');
+  // const countryParentElm = contains.last().parent();
+
+  // const countryElm = countryParentElm?.children().last();
+  // const country = countryElm.text().trim();
+
+  // if (!countryElm) {
+  //   storage.local.set({ [asin]: null });
+
+  //   return null;
+  // }
+
+  // // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
+  // storage.local.set({ [asin]: country });
+  // return country;
+
+  const country = getCountryFromDoc(data);
+  storage.local.set({ [asin]: country });
+  return country;
+}
+
+export function getCountryFromDoc(doc: string) {
+  const $ = cheerio.load(doc);
   const contains = $('*:contains("Country of Origin")');
   const countryParentElm = contains.last().parent();
 
   const countryElm = countryParentElm?.children().last();
   const country = countryElm.text().trim();
 
-  if (!countryElm) {
-    storage.local.set({ [asin]: null });
-
-    return null;
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
-  storage.local.set({ [asin]: country });
-  return country;
+  return countryElm ? country : null;
 }
 
 /**
