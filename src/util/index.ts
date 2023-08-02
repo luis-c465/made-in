@@ -6,6 +6,5 @@ export function getElementByXpath(doc: Document, path: string) {
 }
 
 export function wait(ms: number): Promise<void> {
-  console.log('waiting', ms);
   return new Promise((resolve) => setTimeout(resolve, ms));
 }

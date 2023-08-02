@@ -1,5 +1,6 @@
 <script lang="ts">
   import SummaryClickable from '~/components/SummaryClickable.svelte';
+  import { cleanString } from '~/content/amazon/util';
   import type { Data } from '~/util/types';
 
   export let data: Data[];
@@ -7,6 +8,7 @@
     data
       .filter(Boolean)
       .filter(({ country }) => !!country)
+      .map((data) => ({ ...data, country: cleanString(data.country) }))
       .reduce<{
         [country: string]: {
           count: number;

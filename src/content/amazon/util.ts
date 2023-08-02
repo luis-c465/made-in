@@ -76,3 +76,13 @@ export function renderProduct(product: HTMLDivElement, countryOfOrigin: string |
 export function isVisible(element: HTMLElement) {
   return element.offsetWidth > 0 || element.offsetHeight > 0 || element.getClientRects().length > 0;
 }
+
+export function cleanString(input: string) {
+  let output = '';
+  for (let i = 0; i < input.length; i++) {
+    if (input.charCodeAt(i) <= 127) {
+      output += input.charAt(i);
+    }
+  }
+  return output;
+}

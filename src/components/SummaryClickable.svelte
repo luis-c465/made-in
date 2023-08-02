@@ -19,7 +19,6 @@
         align: 'center',
       },
     }));
-    console.log({ country, data, steps });
 
     const driverObj = driver({
       showProgress: true,
