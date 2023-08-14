@@ -1,10 +1,10 @@
-import * as cheerio from 'cheerio';
-import { flag } from 'country-emoji';
-import { storage } from 'webextension-polyfill';
+import * as cheerio from "cheerio";
+import { flag } from "country-emoji";
+import { storage } from "webextension-polyfill";
 
 const font = new FontFace(
-  'Noto Color Emoji',
-  'url(https://raw.githack.com/googlefonts/noto-emoji/main/fonts/NotoColorEmoji.ttf)'
+  "Noto Color Emoji",
+  "url(https://raw.githack.com/googlefonts/noto-emoji/main/fonts/NotoColorEmoji.ttf)",
 );
 document.fonts.add(font);
 
@@ -18,30 +18,14 @@ document.fonts.add(font);
  * @returns The country of origin or null if not found
  */
 export async function getCountryOfOrigin(product: HTMLDivElement, asin: string) {
-  const link = product.querySelector<HTMLAnchorElement>('a.a-link-normal');
+  const link = product.querySelector<HTMLAnchorElement>("a.a-link-normal");
   const href = link?.href as string;
 
-  if (!href.includes('dp')) {
+  if (!href.includes("dp")) {
     return null;
   }
 
   const data = await fetch(href).then((res) => res.text());
-  // const $ = cheerio.load(data);
-  // const contains = $('*:contains("Country of Origin")');
-  // const countryParentElm = contains.last().parent();
-
-  // const countryElm = countryParentElm?.children().last();
-  // const country = countryElm.text().trim();
-
-  // if (!countryElm) {
-  //   storage.local.set({ [asin]: null });
-
-  //   return null;
-  // }
-
-  // // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
-  // storage.local.set({ [asin]: country });
-  // return country;
 
   const country = getCountryFromDoc(data);
   storage.local.set({ [asin]: country });
@@ -72,20 +56,20 @@ export function renderProduct(product: HTMLDivElement, countryOfOrigin: string |
     return;
   }
 
-  const div = document.createElement('div');
+  const div = document.createElement("div");
   div.innerText = emoji;
-  div.id = 'country-of-origin';
+  div.id = "country-of-origin";
 
-  div.style.position = 'absolute';
-  div.style.top = '10';
-  div.style.right = '10';
-  div.style.fontSize = '2.5rem';
-  div.style.zIndex = '2';
-  div.style.fontFamily = 'Noto Color Emoji';
+  div.style.position = "absolute";
+  div.style.top = "10";
+  div.style.right = "10";
+  div.style.fontSize = "2.5rem";
+  div.style.zIndex = "2";
+  div.style.fontFamily = "Noto Color Emoji";
 
   div.title = `Product Country of Origin: ${countryOfOrigin}`;
 
-  product.style.position = 'relative';
+  product.style.position = "relative";
   product.prepend(div);
 }
 
@@ -94,7 +78,7 @@ export function isVisible(element: HTMLElement) {
 }
 
 export function cleanString(input: string) {
-  let output = '';
+  let output = "";
   for (let i = 0; i < input.length; i++) {
     if (input.charCodeAt(i) <= 127) {
       output += input.charAt(i);

@@ -1,8 +1,8 @@
-import { crx } from '@crxjs/vite-plugin';
-import { svelte } from '@sveltejs/vite-plugin-svelte';
-import { resolve } from 'path';
-import { defineConfig } from 'vite';
-import manifest from './src/manifest';
+import { crx } from "@crxjs/vite-plugin";
+import { svelte } from "@sveltejs/vite-plugin-svelte";
+import { resolve } from "path";
+import { defineConfig } from "vite";
+import manifest from "./src/manifest";
 
 export default defineConfig({
   // @see https://github.com/crxjs/chrome-extension-tools/issues/696
@@ -14,24 +14,24 @@ export default defineConfig({
     },
     fs: {
       // Allow serving files from one level up to the project root
-      allow: ['..'],
+      allow: [".."],
     },
   },
   // prevent src/ prefix on extension urls
-  root: resolve(__dirname, 'src'),
-  publicDir: resolve(__dirname, 'public'),
+  root: resolve(__dirname, "src"),
+  publicDir: resolve(__dirname, "public"),
   build: {
-    outDir: resolve(__dirname, 'dist'),
+    outDir: resolve(__dirname, "dist"),
     rollupOptions: {
       output: {
-        chunkFileNames: 'assets/chunk-[hash].js',
+        chunkFileNames: "assets/chunk-[hash].js",
       },
     },
   },
   resolve: {
     alias: {
-      '~': resolve(__dirname, 'src'),
+      "~": resolve(__dirname, "src"),
     },
   },
-  plugins: [crx({ manifest }), svelte({ configFile: '../svelte.config.js' })],
+  plugins: [crx({ manifest }), svelte({ configFile: "../svelte.config.js" })],
 });

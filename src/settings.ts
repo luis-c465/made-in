@@ -1,3 +1,3 @@
-import { setting } from '~/util/store';
+import { setting } from "~/util/store";
 
-export const concurrency = setting('concurrency', 30);
+export const concurrency = setting("concurrency", 30);

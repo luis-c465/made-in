@@ -55,7 +55,7 @@
     "nano-staged": "^0.8.0",
     "npm-run-all2": "^6.0.5",
     "postcss": "^8.4.24",
-    "prettier": "^2.7.1",
+    "prettier": "^3.0.1",
     "rimraf": "^3.0.2",
     "simple-git-hooks": "^2.8.0",
     "svelte": "^4.0.0",

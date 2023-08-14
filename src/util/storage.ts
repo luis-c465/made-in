@@ -1,7 +1,7 @@
-import { storage } from 'webextension-polyfill';
+import { storage } from "webextension-polyfill";
 
-export type StorageType = 'sync' | 'local' | 'managed';
-export const DEFAULT_STORAGE: StorageType = 'local';
+export type StorageType = "sync" | "local" | "managed";
+export const DEFAULT_STORAGE: StorageType = "local";
 
 /**
  * Get a single item from browser storage, or set it if it doesn't exist
@@ -9,7 +9,7 @@ export const DEFAULT_STORAGE: StorageType = 'local';
 export async function useStored<T>(
   key: string,
   getter: (() => T) | (() => Promise<T>),
-  storageType: StorageType = DEFAULT_STORAGE
+  storageType: StorageType = DEFAULT_STORAGE,
 ) {
   const localItem = await get<T>(key, storageType);
 
