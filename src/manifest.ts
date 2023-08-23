@@ -5,9 +5,6 @@ import { version } from "../package.json";
 // vite root folder: src, public folder: public (based on the project root)
 // @see ../vite.config.ts#L16
 
-const amazonSearchHost = "www.amazon.com/s";
-const amazonProductHost = "www.amazon.com/*/dp";
-
 const icons: Record<string, string> = {
   "16": "images/icon16.png",
   "32": "images/icon32.png",
@@ -15,11 +12,9 @@ const icons: Record<string, string> = {
   "128": "images/icon128.png",
 };
 
-const activateOnAmazonSearch = [`https://${amazonSearchHost}*`, `http://${amazonSearchHost}*`];
-
-const activateOnAmazonProduct = [`http://${amazonProductHost}*`, `https://${amazonProductHost}*`];
-
-const activateOn = [...activateOnAmazonSearch, ...activateOnAmazonProduct];
+const amazonSearch = withHttps("www.amazon.com/s*");
+const amazonProduct = withHttps("www.amazon.com/*/dp*");
+const ebaySearch = withHttps("www.ebay.com/sch*");
 
 const manifest = defineManifest(async (env) => ({
   manifest_version: 3,
@@ -28,15 +23,19 @@ const manifest = defineManifest(async (env) => ({
   version,
   content_scripts: [
     {
-      matches: activateOnAmazonSearch,
+      matches: amazonSearch,
       js: ["content/amazon/index.ts"],
     },
     {
-      matches: activateOnAmazonProduct,
+      matches: amazonProduct,
       js: ["content/amazon/product.ts"],
     },
+    {
+      matches: ebaySearch,
+      js: ["content/ebay/search.ts"],
+    },
   ],
-  host_permissions: activateOn,
+  host_permissions: [...amazonSearch, ...amazonProduct],
   options_ui: {
     page: "options/options.html",
     open_in_tab: true,
@@ -48,5 +47,9 @@ const manifest = defineManifest(async (env) => ({
   icons,
   permissions: ["storage"],
 }));
+
+function withHttps(url: string) {
+  return [`https://${url}`, `http://${url}`];
+}
 
 export default manifest;

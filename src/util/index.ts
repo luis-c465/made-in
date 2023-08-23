@@ -8,3 +8,17 @@ export function getElementByXpath(doc: Document, path: string) {
 export function wait(ms: number): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
+
+export function isVisible(element: HTMLElement) {
+  return element.offsetWidth > 0 || element.offsetHeight > 0 || element.getClientRects().length > 0;
+}
+
+export function cleanString(input: string) {
+  let output = "";
+  for (let i = 0; i < input.length; i++) {
+    if (input.charCodeAt(i) <= 127) {
+      output += input.charAt(i);
+    }
+  }
+  return output;
+}

@@ -6,8 +6,10 @@
   import Popup from "~/components/Popup.svelte";
   import Summary from "~/components/Summary.svelte";
   import { concurrency } from "~/settings";
+  import { isVisible } from "~/util";
+  import { renderProduct as renderProductFlag } from "~/util/render";
   import type { Data } from "~/util/types";
-  import { getCountryOfOrigin, isVisible, renderProduct as renderProductFlag } from "./util";
+  import { getCountryOfOrigin, getID } from "./util";
 
   let numResolved = 0;
   let productsElms: HTMLDivElement[] = [];
@@ -19,27 +21,26 @@
 
   async function main() {
     productsElms = Array.from(
-      document.querySelectorAll<HTMLDivElement>('.s-search-results > div[data-asin^="B"]')
+      document.querySelectorAll<HTMLDivElement>(".srp-results > li.s-item")
     ).filter(isVisible);
     numResolved = 0;
 
-    const ids = productsElms.map((product) => product.dataset.asin as string);
+    const productAndIDS = productsElms.map((product) => [product, getID(product)] as const);
+    debugger;
 
-    const defaultValues = Object.fromEntries(ids.map((id) => [id, null]));
+    const defaultValues = Object.fromEntries(productAndIDS.map(([_, id]) => [id, null]));
     const cache = (await storage.local.get(defaultValues)) as Record<string, string | null>;
 
     data = Array(data.length).fill(null);
     await pMap(
-      productsElms,
-      async (product, i) => {
-        const asin = product.dataset.asin as string;
-        const country =
-          cache[asin] !== null ? cache[asin] : await getCountryOfOrigin(product, asin);
+      productAndIDS,
+      async ([product, id], i) => {
+        const country = !!cache[id] ? cache[id] : await getCountryOfOrigin(product, id);
         renderProductFlag(product, country);
 
         numResolved = Math.min(numResolved + 1, productsElms.length);
 
-        data[i] = { asin, country: country as string, product };
+        data[i] = { asin: id, country: country as string, product };
         data = [...data];
       },
       { concurrency: await $concurrency }
