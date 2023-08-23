@@ -1,14 +1,18 @@
 <script lang="ts">
-  import SummaryClickable from '~/components/SummaryClickable.svelte';
-  import { cleanString } from '~/content/amazon/util';
-  import type { Data } from '~/util/types';
+  import { flag, name } from "country-emoji";
+  import SummaryClickable from "~/components/SummaryClickable.svelte";
+  import { cleanString } from "~/content/amazon/util";
+  import type { Data } from "~/util/types";
 
   export let data: Data[];
   $: summary = Object.entries(
     data
       .filter(Boolean)
       .filter(({ country }) => !!country)
-      .map((data) => ({ ...data, country: cleanString(data.country) }))
+      .map((data) => ({
+        ...data,
+        country: name(flag(cleanString(data.country)) ?? data.country) ?? data.country,
+      }))
       .reduce<{
         [country: string]: {
           count: number;

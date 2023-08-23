@@ -47,6 +47,8 @@ export function mapCountryNames(name: string) {
     case "america":
       return "United States";
     case "unknown":
+    case "does not apply":
+    case "":
       return null;
 
     default:

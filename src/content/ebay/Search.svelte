@@ -26,16 +26,19 @@
     numResolved = 0;
 
     const productAndIDS = productsElms.map((product) => [product, getID(product)] as const);
-    debugger;
 
-    const defaultValues = Object.fromEntries(productAndIDS.map(([_, id]) => [id, null]));
-    const cache = (await storage.local.get(defaultValues)) as Record<string, string | null>;
+    const defaultValues = Object.fromEntries(productAndIDS.map(([_, id]) => [id, false]));
+    const cache = (await storage.local.get(defaultValues)) as Record<string, string | null | false>;
 
     data = Array(data.length).fill(null);
     await pMap(
       productAndIDS,
       async ([product, id], i) => {
-        const country = !!cache[id] ? cache[id] : await getCountryOfOrigin(product, id);
+        const country =
+          cache[id] !== false
+            ? (cache[id] as string | null)
+            : await getCountryOfOrigin(product, id);
+
         renderProductFlag(product, country);
 
         numResolved = Math.min(numResolved + 1, productsElms.length);
