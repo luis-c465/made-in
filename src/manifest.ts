@@ -19,7 +19,7 @@ const ebaySearch = withHttps("www.ebay.com/sch*");
 const manifest = defineManifest(async (env) => ({
   manifest_version: 3,
   name: `${env.mode === "development" ? "[Dev] " : ""} Made in`,
-  description: "Made in",
+  description: "Shows the country of origin on the products page of Amazon & Ebay",
   version,
   content_scripts: [
     {
