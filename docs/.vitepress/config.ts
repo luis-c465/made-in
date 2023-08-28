@@ -14,13 +14,16 @@ export default defineConfig({
     },
   },
   base: "/made-in/",
+  vite: {
+    publicDir: "./assets",
+  },
   head: [
     [
       "link",
       {
         rel: "icon",
         type: "image/svg+xml",
-        href: "/assets/favicon.svg",
+        href: "/favicon.svg",
       },
     ],
     [
@@ -28,13 +31,13 @@ export default defineConfig({
       {
         rel: "icon",
         type: "image/png",
-        href: "/assets/favicon.png",
+        href: "/favicon.png",
       },
     ],
   ],
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
-    logo: { src: "/assets/icon.svg", width: 24, height: 24 },
+    logo: { src: "/icon.svg", width: 24, height: 24 },
     nav: [
       { text: "Home", link: "/" },
       { text: "Getting Started", link: "/getting-started" },

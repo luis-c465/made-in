@@ -14,17 +14,17 @@ hero:
       text: Supported Sites
       link: /supported-sites
   image:
-    src: /assets/icon.svg
+    src: /icon.svg
     alt: Made In
 
 features:
   - title: Amazon
     icon:
-      src: /assets/amazon.svg
+      src: /amazon.svg
     details: View the country of origin for products on Amazon
   - title: Ebay
     icon:
-      src: /assets/ebay.svg
+      src: /ebay.svg
     details: View the country of origin for products on Ebay
   - title: + Many more to come
     icon: 🚧

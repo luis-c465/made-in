@@ -14,7 +14,7 @@ This means that the displayed country of origin **may not be 100% accurate** as 
 
 Simply visit any of the [Supported Sites](/supported-sites) and the extension will automatically fetch the country of origin for the product and display its corresponding flag in the upper left hand corner of the product.
 
-![Product](/assets/product.png)
+![Product](/product.png)
 
 ::: warning
 
@@ -27,10 +27,10 @@ To fix this you can slow down the rate at which the extension fetches data you c
 
 The popup is the main interface for the extension.
 
-![Alt text](/assets/popup.png)
+![Alt text](/popup.png)
 
 It shows the progress on fetching the country of origin for the products on the page and and shows a summary of the countries of origin for the products on the current page.
 
 Additionally you can click on the flag of a country to highlight products from that country.
 
-![Alt text](/assets/highlight.png)
+![Alt text](/highlight.png)

@@ -1,6 +1,6 @@
 <div align="center">
   <br>
- <img src="./assets/icon.svg" alt="Made in Browser Extension" width="128">
+ <img src="./icon.svg" alt="Made in Browser Extension" width="128">
   <br>
   <h2>
     Made In <br>
@@ -38,7 +38,7 @@
 ## Features
 
 - Support for Amazon search results page
-  ![Amazon search results page](./assets/amazon.png)
+  ![Amazon search results page](./amazon.png)
 
 [^1]: While it is fully supported and stable in most cases, hard reloading is rarely recommended.
 
