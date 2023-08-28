@@ -13,6 +13,7 @@ export default defineConfig({
       md.use(imgSize);
     },
   },
+  base: "/made-in/",
   head: [
     [
       "link",
