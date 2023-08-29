@@ -13,6 +13,9 @@ hero:
     - theme: alt
       text: Supported Sites
       link: /supported-sites
+    - theme: alt
+      text: Changelog
+      link: /changelog
   image:
     src: /icon.svg
     alt: Made In

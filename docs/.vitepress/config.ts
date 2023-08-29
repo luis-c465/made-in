@@ -41,6 +41,9 @@ export default defineConfig({
     nav: [
       { text: "Home", link: "/" },
       { text: "Getting Started", link: "/getting-started" },
+      { text: "Options", link: "/options" },
+      { text: "Supported Sites", link: "/supported-sites" },
+      { text: "Change Log", link: "/changelog" },
     ],
     editLink: {
       pattern: "https://github.com/luis-c465/made-in/edit/main/docs/:path",
@@ -58,6 +61,7 @@ export default defineConfig({
           { text: "Getting Started", link: "/getting-started" },
           { text: "Options", link: "/options" },
           { text: "Supported Sites", link: "/supported-sites" },
+          { text: "Change Log", link: "/changelog" },
         ],
       },
     ],
