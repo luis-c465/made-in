@@ -29,9 +29,6 @@ dependencies:
   driver.js:
     specifier: ^1.1.0
     version: 1.1.0
-  normalize-strings:
-    specifier: ^1.1.1
-    version: 1.1.1
   p-map:
     specifier: ^6.0.0
     version: 6.0.0
@@ -3509,13 +3506,6 @@ packages:
       }
     engines: { node: ">=0.10.0" }
     dev: true
-
-  /normalize-strings@1.1.1:
-    resolution:
-      {
-        integrity: sha512-fARPRdTwmrQDLYhmeh7j/eZwrCP6WzxD6uKOdK/hT/uKACAE9AG2Bc2dgqOZLkfmmctHpfcJ9w3AQnfLgg3GYg==,
-      }
-    dev: false
 
   /npm-run-all2@6.0.5:
     resolution:
