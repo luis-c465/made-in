@@ -23,7 +23,7 @@ export default defineConfig({
       {
         rel: "icon",
         type: "image/svg+xml",
-        href: "/favicon.svg",
+        href: "/made-in/favicon.svg",
       },
     ],
     [
@@ -31,7 +31,7 @@ export default defineConfig({
       {
         rel: "icon",
         type: "image/png",
-        href: "/favicon.png",
+        href: "/made-in/favicon.png",
       },
     ],
   ],
