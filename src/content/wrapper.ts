@@ -6,6 +6,12 @@ import { config, cssom, observe, twind } from "./twind";
  * Returns a shadow root with a shadow wrapper element for the content script.
  */
 export function getShadowWrapper() {
+  const font = new FontFace(
+    "Noto Color Emoji",
+    "url(https://raw.githack.com/googlefonts/noto-emoji/main/fonts/NotoColorEmoji.ttf)",
+  );
+  document.fonts.add(font);
+
   const contentRoot = document.createElement("div");
   contentRoot.id = "made-in-extension-root";
   contentRoot.style.display = "contents";

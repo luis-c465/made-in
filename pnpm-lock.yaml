@@ -29,12 +29,18 @@ dependencies:
   driver.js:
     specifier: ^1.1.0
     version: 1.1.0
+  normalize-strings:
+    specifier: ^1.1.1
+    version: 1.1.1
   p-map:
     specifier: ^6.0.0
     version: 6.0.0
   svelte-asyncable:
     specifier: ^2.1.1
     version: 2.1.1(svelte@4.0.0)
+  unidecode:
+    specifier: ^0.1.8
+    version: 0.1.8
   url-polyfill:
     specifier: ^1.1.12
     version: 1.1.12
@@ -58,6 +64,9 @@ devDependencies:
   "@types/lodash-es":
     specifier: ^4.17.7
     version: 4.17.7
+  "@types/unidecode":
+    specifier: ^0.1.1
+    version: 0.1.1
   "@types/webextension-polyfill":
     specifier: ^0.10.0
     version: 0.10.0
@@ -1107,6 +1116,13 @@ packages:
     resolution:
       {
         integrity: sha512-G8hZ6XJiHnuhQKR7ZmysCeJWE08o8T0AXtk5darsCaTVsYZhhgUrq53jizaR2FvsoeCwJhlmwTjkXBY5Pn/ZHw==,
+      }
+    dev: true
+
+  /@types/unidecode@0.1.1:
+    resolution:
+      {
+        integrity: sha512-ReYnWajSY+QnZk5dBpSztek+kHUtpHJkf0pSZBx2ZVIxcSBkRLY7m0caPwVKXC6WjE65G2fVU84EpiFbdJVDuQ==,
       }
     dev: true
 
@@ -3494,6 +3510,13 @@ packages:
     engines: { node: ">=0.10.0" }
     dev: true
 
+  /normalize-strings@1.1.1:
+    resolution:
+      {
+        integrity: sha512-fARPRdTwmrQDLYhmeh7j/eZwrCP6WzxD6uKOdK/hT/uKACAE9AG2Bc2dgqOZLkfmmctHpfcJ9w3AQnfLgg3GYg==,
+      }
+    dev: false
+
   /npm-run-all2@6.0.5:
     resolution:
       {
@@ -4700,6 +4723,14 @@ packages:
         integrity: sha512-pGtPAQmLwh+R9w81WVHzui1FfedpQWQpiaIIfPCwhtsBez4q6DYbJFfyXPVHPUTNFnedAvNEnkoFiLuhXIR94w==,
       }
     dev: true
+
+  /unidecode@0.1.8:
+    resolution:
+      {
+        integrity: sha512-SdoZNxCWpN2tXTCrGkPF/0rL2HEq+i2gwRG1ReBvx8/0yTzC3enHfugOf8A9JBShVwwrRIkLX0YcDUGbzjbVCA==,
+      }
+    engines: { node: ">= 0.4.12" }
+    dev: false
 
   /universalify@2.0.0:
     resolution:

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { flag, name } from "country-emoji";
+  import unidecode from "unidecode";
   import SummaryClickable from "~/components/SummaryClickable.svelte";
-  import { cleanString } from "~/content/amazon/util";
   import type { Data } from "~/util/types";
 
   export let data: Data[];
@@ -9,10 +9,13 @@
     data
       .filter(Boolean)
       .filter(({ country }) => !!country)
-      .map((data) => ({
-        ...data,
-        country: name(flag(cleanString(data.country)) ?? data.country) ?? data.country,
-      }))
+      .map((data) => {
+        const country = unidecode(data.country);
+        return {
+          ...data,
+          country: name(flag(country) ?? country) ?? country,
+        };
+      })
       .reduce<{
         [country: string]: {
           count: number;

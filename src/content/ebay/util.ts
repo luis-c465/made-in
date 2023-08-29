@@ -1,21 +1,7 @@
 import * as cheerio from "cheerio";
 import { storage } from "webextension-polyfill";
+import { mapCountryNames } from "~/util/map";
 
-const font = new FontFace(
-  "Noto Color Emoji",
-  "url(https://raw.githack.com/googlefonts/noto-emoji/main/fonts/NotoColorEmoji.ttf)",
-);
-document.fonts.add(font);
-
-/*
- * Get the country of origin from the product page
- *
- * Tries getting the information from the cache first
- *
- * @param product The product element from the amazon search page
- *
- * @returns The country of origin or null if not found
- */
 export async function getCountryOfOrigin(product: HTMLDivElement, dbID: string) {
   const link = product.querySelector<HTMLAnchorElement>("a.s-item__link");
   const href = link?.href;
@@ -40,22 +26,4 @@ export function getCountryFromDoc(doc: string) {
   const country = countryElm.text().trim();
 
   return countryElm ? mapCountryNames(country) : null;
-}
-
-export function mapCountryNames(name: string) {
-  switch (name.toLowerCase()) {
-    case "america":
-      return "United States";
-    case "unknown":
-    case "does not apply":
-    case "":
-      return null;
-
-    default:
-      return name;
-  }
-}
-
-export function getID(product: HTMLDivElement) {
-  return `ebay-${product?.id?.split("item")?.at(1)}`;
 }

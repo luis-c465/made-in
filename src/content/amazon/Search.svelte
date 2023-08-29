@@ -4,13 +4,13 @@
   import { getCountryOfOrigin } from "./util";
 
   function getElements() {
-    return Array.from(document.querySelectorAll<HTMLDivElement>(".srp-results > li.s-item")).filter(
-      isVisible
-    );
+    return Array.from(
+      document.querySelectorAll<HTMLDivElement>('.s-search-results > div[data-asin^="B"]')
+    ).filter(isVisible);
   }
 
   function getID(product: HTMLDivElement) {
-    return `ebay-${product?.id?.split("item")?.at(1)}`;
+    return `amazon-${product.dataset.asin}`;
   }
 </script>
 

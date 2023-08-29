@@ -1,12 +1,5 @@
 import * as cheerio from "cheerio";
-import { flag } from "country-emoji";
 import { storage } from "webextension-polyfill";
-
-const font = new FontFace(
-  "Noto Color Emoji",
-  "url(https://raw.githack.com/googlefonts/noto-emoji/main/fonts/NotoColorEmoji.ttf)",
-);
-document.fonts.add(font);
 
 /*
  * Get the country of origin from the product page
@@ -41,48 +34,4 @@ export function getCountryFromDoc(doc: string) {
   const country = countryElm.text().trim();
 
   return countryElm ? country : null;
-}
-
-/**
- * Render the country of origin on the product page for the given product element
- */
-export function renderProduct(product: HTMLDivElement, countryOfOrigin: string | null) {
-  if (!countryOfOrigin) {
-    return;
-  }
-
-  const emoji = flag(countryOfOrigin);
-  if (!emoji) {
-    return;
-  }
-
-  const div = document.createElement("div");
-  div.innerText = emoji;
-  div.id = "country-of-origin";
-
-  div.style.position = "absolute";
-  div.style.top = "10";
-  div.style.right = "10";
-  div.style.fontSize = "2.5rem";
-  div.style.zIndex = "2";
-  div.style.fontFamily = "Noto Color Emoji";
-
-  div.title = `Product Country of Origin: ${countryOfOrigin}`;
-
-  product.style.position = "relative";
-  product.prepend(div);
-}
-
-export function isVisible(element: HTMLElement) {
-  return element.offsetWidth > 0 || element.offsetHeight > 0 || element.getClientRects().length > 0;
-}
-
-export function cleanString(input: string) {
-  let output = "";
-  for (let i = 0; i < input.length; i++) {
-    if (input.charCodeAt(i) <= 127) {
-      output += input.charAt(i);
-    }
-  }
-  return output;
 }

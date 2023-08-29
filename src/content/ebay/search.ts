@@ -1,4 +1,4 @@
-import { getShadowWrapper } from "../util";
+import { getShadowWrapper } from "../wrapper";
 import App from "./Search.svelte";
 
 const app = new App({

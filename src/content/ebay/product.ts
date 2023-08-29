@@ -1,4 +1,4 @@
-import { renderProduct } from "../amazon/util";
+import { renderProduct } from "~/util/render";
 import { getCountryFromDoc } from "./util";
 
 const imgContainer = document.querySelector<HTMLDivElement>("#main-image-container")!;
